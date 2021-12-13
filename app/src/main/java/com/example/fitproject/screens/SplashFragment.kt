@@ -7,10 +7,17 @@ import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.findNavController
 import androidx.navigation.navOptions
 import com.example.fitproject.R
+import androidx.appcompat.app.AppCompatActivity
+import androidx.drawerlayout.widget.DrawerLayout
+import com.example.fitproject.MainActivity
+
 
 class SplashFragment : Fragment(R.layout.fragment_splash) {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+
+        (activity as AppCompatActivity?)!!.supportActionBar!!.hide()
+        (activity as MainActivity).enableDisableDrawer(DrawerLayout.LOCK_MODE_LOCKED_CLOSED)
 
         view.postDelayed({
             findNavController().navigate(
@@ -31,5 +38,11 @@ class SplashFragment : Fragment(R.layout.fragment_splash) {
             })
         }, 2000)
 
+    }
+
+    override fun onStop() {
+        super.onStop()
+        (activity as AppCompatActivity?)!!.supportActionBar!!.show()
+        (activity as MainActivity).enableDisableDrawer(DrawerLayout.LOCK_MODE_UNLOCKED)
     }
 }

@@ -19,20 +19,16 @@ import com.example.fitproject.screens.ProgramsFragment
 import java.lang.Exception
 import com.google.android.material.navigation.NavigationView
 
-
-
-
-
 class MainActivity : AppCompatActivity() {
 
-    lateinit var toolbar : Toolbar
-    lateinit var drawerLayout : DrawerLayout
-    lateinit var navigationViewDrawer : NavigationView
+    lateinit var toolbar: Toolbar
+    lateinit var drawerLayout: DrawerLayout
+    lateinit var navigationViewDrawer: NavigationView
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
-         navigationViewDrawer = findViewById(R.id.nvView)
+        navigationViewDrawer = findViewById(R.id.nvView)
 
         toolbar = findViewById(R.id.toolbar)
 
@@ -41,7 +37,7 @@ class MainActivity : AppCompatActivity() {
 
         drawerLayout = findViewById(R.id.drawer_layout)
 
-         val drawerToggle = setupDrawerToggle()
+        val drawerToggle = setupDrawerToggle()
 
         setupDrawerContent(navigationViewDrawer)
 
@@ -50,8 +46,8 @@ class MainActivity : AppCompatActivity() {
         drawerToggle?.syncState()
 
 
-
     }
+
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
         // The action bar home/up action should open or close the drawer.
         when (item.itemId) {
@@ -112,8 +108,9 @@ class MainActivity : AppCompatActivity() {
         )
     }
 
-
-
+    fun enableDisableDrawer(mode: Int) {
+        drawerLayout.setDrawerLockMode(mode)
+    }
 
 
 }
