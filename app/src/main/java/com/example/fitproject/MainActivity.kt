@@ -71,9 +71,10 @@ class MainActivity : AppCompatActivity() {
         var fragment: Fragment? = null
         val fragmentClass: Class<*>
         fragmentClass = when (menuItem.itemId) {
-            R.id.nav_first_fragment -> ExercisesFragment::class.java
+            R.id.nav_first_fragment -> MainFragment::class.java
             R.id.nav_second_fragment -> ProgramsFragment::class.java
-            R.id.nav_third_fragment -> MeasurementsFragment::class.java
+            R.id.nav_third_fragment -> ProgramsFragment::class.java
+            R.id.nav_four_fragment -> MeasurementsFragment::class.java
             else -> MainFragment::class.java
         }
         try {

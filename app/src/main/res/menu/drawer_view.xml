@@ -4,16 +4,20 @@
     <group android:checkableBehavior="single">
         <item
             android:id="@+id/nav_first_fragment"
-            android:icon="@drawable/ic_one"
-            android:title="First" />
+            android:icon="@drawable/ic_home"
+            android:title="HOME" />
         <item
             android:id="@+id/nav_second_fragment"
-            android:icon="@drawable/ic_two"
-            android:title="Second" />
+            android:icon="@drawable/ic_one"
+            android:title="FIRST" />
         <item
             android:id="@+id/nav_third_fragment"
+            android:icon="@drawable/ic_two"
+            android:title="SECOND" />
+        <item
+            android:id="@+id/nav_four_fragment"
             android:icon="@drawable/ic_three"
-            android:title="Third" />
+            android:title="THIRD" />
     </group>
 
     <item android:title="Sub items">

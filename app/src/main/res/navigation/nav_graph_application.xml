@@ -15,7 +15,8 @@
             app:nullable="true" />
         <action
             android:id="@+id/action_mainFragment_to_exercisesFragment"
-            app:destination="@id/exercisesFragment" />
+            app:destination="@id/exercisesFragment"
+            app:popUpTo="@id/mainFragment" />
         <action
             android:id="@+id/action_mainFragment_to_programsFragment"
             app:destination="@id/programsFragment" />

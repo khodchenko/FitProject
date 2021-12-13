@@ -1,20 +1,112 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent">
+<layout>
 
-    <androidx.appcompat.widget.AppCompatTextView
-        android:id="@+id/mainNameTextView"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="@string/main"
-        android:textSize="72sp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.5"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+    <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:app="http://schemas.android.com/apk/res-auto"
+        xmlns:tools="http://schemas.android.com/tools"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <TextView
+            android:id="@+id/textView2"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="16dp"
+            android:text="From program"
+            android:visibility="invisible"
+            app:layout_constraintBottom_toBottomOf="@+id/fab_second"
+            app:layout_constraintEnd_toStartOf="@+id/fab_second"
+            app:layout_constraintTop_toTopOf="@+id/fab_second" />
+
+        <TextView
+            android:id="@+id/textView3"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="16dp"
+            android:text="From past"
+            android:visibility="invisible"
+            app:layout_constraintBottom_toBottomOf="@+id/fab_third"
+            app:layout_constraintEnd_toStartOf="@+id/fab_third"
+            app:layout_constraintTop_toTopOf="@+id/fab_third" />
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/mainNameTextView"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/main"
+            android:textSize="72sp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.5"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <com.google.android.material.floatingactionbutton.FloatingActionButton
+            android:id="@+id/fab_main"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_margin="16dp"
+            android:backgroundTint="@color/purple_200"
+            android:clickable="true"
+            android:focusable="true"
+            android:tint="@color/white"
+            app:fabCustomSize="48dp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:srcCompat="@drawable/ic_add" />
+
+        <com.google.android.material.floatingactionbutton.FloatingActionButton
+            android:id="@+id/fab_first"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_margin="16dp"
+            android:clickable="true"
+            android:visibility="invisible"
+            app:fabCustomSize="40dp"
+            app:layout_constraintBottom_toTopOf="@+id/fab_main"
+            app:layout_constraintEnd_toEndOf="@+id/fab_main"
+            app:layout_constraintStart_toStartOf="@+id/fab_main"
+            app:srcCompat="@drawable/ic_one" />
+
+        <com.google.android.material.floatingactionbutton.FloatingActionButton
+            android:id="@+id/fab_second"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_margin="16dp"
+            android:layout_marginBottom="16dp"
+            android:clickable="true"
+            android:visibility="invisible"
+            app:fabCustomSize="40dp"
+            app:layout_constraintBottom_toTopOf="@+id/fab_first"
+            app:layout_constraintEnd_toEndOf="@+id/fab_first"
+            app:layout_constraintStart_toStartOf="@+id/fab_first"
+            app:srcCompat="@drawable/ic_two" />
+
+        <com.google.android.material.floatingactionbutton.FloatingActionButton
+            android:id="@+id/fab_third"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_margin="16dp"
+            android:clickable="true"
+            android:visibility="invisible"
+            app:fabCustomSize="40dp"
+            app:layout_constraintBottom_toTopOf="@+id/fab_second"
+            app:layout_constraintEnd_toEndOf="@+id/fab_second"
+            app:layout_constraintStart_toStartOf="@+id/fab_second"
+            app:srcCompat="@drawable/ic_calendar" />
+
+        <TextView
+            android:id="@+id/textView"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="16dp"
+            android:text="Add new"
+            android:visibility="invisible"
+            app:layout_constraintBottom_toBottomOf="@+id/fab_first"
+            app:layout_constraintEnd_toStartOf="@+id/fab_first"
+            app:layout_constraintTop_toTopOf="@+id/fab_first" />
 
 
-</androidx.constraintlayout.widget.ConstraintLayout>
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+</layout>
