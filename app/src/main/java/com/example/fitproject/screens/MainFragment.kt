@@ -15,8 +15,8 @@ class MainFragment:Fragment (R.layout.fragment_main){
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        view.findViewById<AppCompatTextView>(R.id.mainNameTextView).text = arguments?.getString(
-            userNameKey)
+        //view.findViewById<AppCompatTextView>(R.id.mainNameTextView).text = arguments?.getString(
+       //     userNameKey)
     }
 
 
