@@ -8,17 +8,21 @@ import android.widget.TextView
 import android.widget.Toast
 import androidx.appcompat.widget.AppCompatTextView
 import androidx.fragment.app.Fragment
+import androidx.viewpager2.widget.ViewPager2
 import com.example.fitproject.R
+import com.example.fitproject.adapters.ViewPagerAdapter
 import com.google.android.material.floatingactionbutton.FloatingActionButton
 
 
 class MainFragment : Fragment(R.layout.fragment_main) {
 
+    private var datesList = mutableListOf<String>()
+
     companion object {
         const val userNameKey = "USER_NAME"
     }
 
-    //todo  activity this
+
     private val rotateOpen: Animation by lazy {
         AnimationUtils.loadAnimation(
             activity,
@@ -46,11 +50,20 @@ class MainFragment : Fragment(R.layout.fragment_main) {
 
     private var fabClicked = false
 
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+
+        postToList()
+
+
+    }
+
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-
+        view.findViewById<ViewPager2>(R.id.view_pager2).adapter =ViewPagerAdapter(datesList)
+        view.findViewById<ViewPager2>(R.id.view_pager2).orientation = ViewPager2.ORIENTATION_HORIZONTAL
 
         view.findViewById<AppCompatTextView>(R.id.mainNameTextView).text = arguments?.getString(
             userNameKey
@@ -77,7 +90,7 @@ class MainFragment : Fragment(R.layout.fragment_main) {
         fabClicked = !fabClicked
     }
 
-
+    //todo make it shorter
     private fun setVisibility(fabClicked: Boolean) {
         if (!fabClicked) {
             view?.findViewById<FloatingActionButton>(R.id.fab_first)?.visibility = View.VISIBLE
@@ -113,6 +126,16 @@ class MainFragment : Fragment(R.layout.fragment_main) {
             view?.findViewById<TextView>(R.id.textView2)?.startAnimation(toBottom)
             view?.findViewById<TextView>(R.id.textView3)?.startAnimation(toBottom)
             view?.findViewById<FloatingActionButton>(R.id.fab_main)?.startAnimation(rotateClose)
+        }
+    }
+
+    private fun addToList(date:String){
+        datesList.add(date)
+    }
+
+    private fun postToList(){
+        for (i in 1..5){
+            addToList("Tile $i")
         }
     }
 
