@@ -1,14 +1,20 @@
 package com.example.fitproject.screens
 
+import android.app.Activity
+import android.content.Intent
+
 import android.os.Bundle
 import android.view.View
 import android.view.animation.Animation
 import android.view.animation.AnimationUtils
 import android.widget.TextView
 import android.widget.Toast
+import androidx.activity.result.ActivityResult
+import androidx.activity.result.contract.ActivityResultContracts
 import androidx.appcompat.widget.AppCompatTextView
 import androidx.fragment.app.Fragment
 import androidx.viewpager2.widget.ViewPager2
+import com.example.fitproject.AddExerciseActivity
 import com.example.fitproject.R
 import com.example.fitproject.adapters.ViewPagerAdapter
 import com.google.android.material.floatingactionbutton.FloatingActionButton
@@ -62,6 +68,13 @@ class MainFragment : Fragment(R.layout.fragment_main) {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
+        val startForResult = registerForActivityResult(ActivityResultContracts.StartActivityForResult()) { result: ActivityResult ->
+            if (result.resultCode == Activity.RESULT_OK) {
+                val intent = result.data
+                //todo Handle the Intent
+            }
+        }
+
         view.findViewById<ViewPager2>(R.id.view_pager2).adapter =ViewPagerAdapter(datesList)
         view.findViewById<ViewPager2>(R.id.view_pager2).orientation = ViewPager2.ORIENTATION_HORIZONTAL
 
@@ -72,8 +85,10 @@ class MainFragment : Fragment(R.layout.fragment_main) {
         view.findViewById<FloatingActionButton>(R.id.fab_main).setOnClickListener {
             onFabClicked()
         }
-        view.findViewById<FloatingActionButton>(R.id.fab_first).setOnClickListener {
-            Toast.makeText(activity, "FIRST BUTTON CLICKED", Toast.LENGTH_SHORT).show()
+        view.findViewById<FloatingActionButton>(R.id.fab_addNewExercise).setOnClickListener {
+            //todo change to fragment
+            //todo change to navigation
+            startForResult.launch(Intent(activity, AddExerciseActivity::class.java))
         }
         view.findViewById<FloatingActionButton>(R.id.fab_second).setOnClickListener {
             Toast.makeText(activity, "SECOND BUTTON CLICKED", Toast.LENGTH_SHORT).show()
@@ -93,14 +108,14 @@ class MainFragment : Fragment(R.layout.fragment_main) {
     //todo make it shorter
     private fun setVisibility(fabClicked: Boolean) {
         if (!fabClicked) {
-            view?.findViewById<FloatingActionButton>(R.id.fab_first)?.visibility = View.VISIBLE
+            view?.findViewById<FloatingActionButton>(R.id.fab_addNewExercise)?.visibility = View.VISIBLE
             view?.findViewById<FloatingActionButton>(R.id.fab_second)?.visibility = View.VISIBLE
             view?.findViewById<FloatingActionButton>(R.id.fab_third)?.visibility = View.VISIBLE
             view?.findViewById<TextView>(R.id.textView)?.visibility = View.VISIBLE
             view?.findViewById<TextView>(R.id.textView2)?.visibility = View.VISIBLE
             view?.findViewById<TextView>(R.id.textView3)?.visibility = View.VISIBLE
         } else{
-            view?.findViewById<FloatingActionButton>(R.id.fab_first)?.visibility = View.INVISIBLE
+            view?.findViewById<FloatingActionButton>(R.id.fab_addNewExercise)?.visibility = View.INVISIBLE
             view?.findViewById<FloatingActionButton>(R.id.fab_second)?.visibility = View.INVISIBLE
             view?.findViewById<FloatingActionButton>(R.id.fab_third)?.visibility = View.INVISIBLE
             view?.findViewById<TextView>(R.id.textView)?.visibility = View.INVISIBLE
@@ -111,7 +126,7 @@ class MainFragment : Fragment(R.layout.fragment_main) {
 
     private fun setAnimation(fabClicked: Boolean) {
         if(!fabClicked){
-            view?.findViewById<FloatingActionButton>(R.id.fab_first)?.startAnimation(fromBottom)
+            view?.findViewById<FloatingActionButton>(R.id.fab_addNewExercise)?.startAnimation(fromBottom)
             view?.findViewById<FloatingActionButton>(R.id.fab_second)?.startAnimation(fromBottom)
             view?.findViewById<FloatingActionButton>(R.id.fab_third)?.startAnimation(fromBottom)
             view?.findViewById<TextView>(R.id.textView)?.startAnimation(fromBottom)
@@ -119,7 +134,7 @@ class MainFragment : Fragment(R.layout.fragment_main) {
             view?.findViewById<TextView>(R.id.textView3)?.startAnimation(fromBottom)
             view?.findViewById<FloatingActionButton>(R.id.fab_main)?.startAnimation(rotateOpen)
         }else{
-            view?.findViewById<FloatingActionButton>(R.id.fab_first)?.startAnimation(toBottom)
+            view?.findViewById<FloatingActionButton>(R.id.fab_addNewExercise)?.startAnimation(toBottom)
             view?.findViewById<FloatingActionButton>(R.id.fab_second)?.startAnimation(toBottom)
             view?.findViewById<FloatingActionButton>(R.id.fab_third)?.startAnimation(toBottom)
             view?.findViewById<TextView>(R.id.textView)?.startAnimation(toBottom)
