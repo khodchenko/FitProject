@@ -21,12 +21,10 @@ class AddExerciseActivity : AppCompatActivity() {
 
         init()
 
-
     }
 
     private fun init(){
-        exercisesList = ArrayList()
-        exercisesList.add(ExercisesModel(R.drawable.ic_home, "TEST"))
+        exercisesList = ArrayList(ExercisesModel.createEmptyList(20))
         setupRecyclerView()
     }
 
