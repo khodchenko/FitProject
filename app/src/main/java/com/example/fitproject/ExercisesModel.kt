@@ -5,11 +5,13 @@ data class ExercisesModel(val exerciseImage: Int, val exerciseName: String) {
         private var lastExerciseId = 0
 
 
-        fun createEmptyList(numExercises: Int): ArrayList<ExercisesModel> {
+        fun createBaseList(numExercises: Int): ArrayList<ExercisesModel> {
             val exercise = ArrayList<ExercisesModel>()
-            for (i in 1..numExercises) {
-                exercise.add(ExercisesModel(R.drawable.ic_home, "TEST ${numExercises + 1}"))
-            }
+            exercise.add(ExercisesModel(R.drawable.ic_home, "TEST 1"))
+            exercise.add(ExercisesModel(R.drawable.ic_home, "TEST 2"))
+            exercise.add(ExercisesModel(R.drawable.ic_home, "TEST 3"))
+            exercise.add(ExercisesModel(R.drawable.ic_home, "TEST 4"))
+
             return exercise
         }
     }

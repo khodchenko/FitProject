@@ -96,4 +96,9 @@
     </string>
     <string name="dummy_button">Dummy Button</string>
     <string name="dummy_content">DUMMY\nCONTENT</string>
+    <string name="exercises">Exercises</string>
+    <string name="addnewexercises">AddNewExercises</string>
+    <string name="addExerciseName">enter exercise name</string>
+    <string name="addExercise">Add</string>
+    <string name="cancel">Cancel</string>
 </resources>
