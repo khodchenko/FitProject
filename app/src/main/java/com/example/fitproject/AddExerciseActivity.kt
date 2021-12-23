@@ -3,6 +3,7 @@ package com.example.fitproject
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.widget.ImageButton
+import android.widget.Toast
 import androidx.fragment.app.DialogFragment
 
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -17,16 +18,15 @@ class AddExerciseActivity : AppCompatActivity(),NoticeDialogFragment.NoticeDialo
     private lateinit var recyclerview: RecyclerView
     private lateinit var addNewExerciseButton : ImageButton
 
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_add_new_exercise)
-
+        init()
         addNewExerciseButton = findViewById(R.id.ib_addNewExercise)
         addNewExerciseButton.setOnClickListener {
             addNewExercise()
         }
-
-        init()
 
     }
 
@@ -46,7 +46,8 @@ class AddExerciseActivity : AppCompatActivity(),NoticeDialogFragment.NoticeDialo
     private fun addNewExercise(){
         val dialog = NoticeDialogFragment()
         dialog.show(supportFragmentManager, "NoticeDialogFragment")
-
+        //Todo how to add new items from dialog
+        recyclerAdapter.notifyDataSetChanged()
     }
 
     override fun onDialogPositiveClick(dialog: DialogFragment) {

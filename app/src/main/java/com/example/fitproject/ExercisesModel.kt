@@ -2,8 +2,6 @@ package com.example.fitproject
 
 data class ExercisesModel(val exerciseImage: Int, val exerciseName: String) {
     companion object {
-        private var lastExerciseId = 0
-
 
         fun createBaseList(numExercises: Int): ArrayList<ExercisesModel> {
             val exercise = ArrayList<ExercisesModel>()
