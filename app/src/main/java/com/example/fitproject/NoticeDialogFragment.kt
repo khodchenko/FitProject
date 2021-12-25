@@ -1,53 +1,51 @@
 package com.example.fitproject
 
-import android.app.Dialog
-import android.content.Context
-import android.content.DialogInterface
+
 import android.os.Bundle
-import android.widget.EditText
-import androidx.appcompat.app.AlertDialog
-import androidx.fragment.app.DialogFragment
 
-class NoticeDialogFragment : DialogFragment() {
+import android.view.View
 
-    internal lateinit var listener: NoticeDialogListener
+import android.widget.Toast
 
-    interface NoticeDialogListener {
-        fun onDialogPositiveClick(dialog: DialogFragment)
-        fun onDialogNegativeClick(dialog: DialogFragment)
+import androidx.core.os.bundleOf
+
+import androidx.fragment.app.Fragment
+
+class NoticeDialogFragment : Fragment(R.layout.dialog_signin) {
+
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+        setUpResultDoneButtonClickListener()
     }
 
-    // Override the Fragment.onAttach() method to instantiate the NoticeDialogListener
-    override fun onAttach(context: Context) {
-        super.onAttach(context)
-        // Verify that the host activity implements the callback interface
-        try {
-            // Instantiate the NoticeDialogListener so we can send events to the host
-            listener = context as NoticeDialogListener
-        } catch (e: ClassCastException) {
-            // The activity doesn't implement the interface, throw exception
-            throw ClassCastException((context.toString() +
-                    " must implement NoticeDialogListener"))
+    private fun setUpResultDoneButtonClickListener() {
+        resultDoneButton.setOnClickListener {
+            try {
+                val number = resultNumberEditText.text.toString().toInt()
+                setResult(number)
+                parentFragmentManager.popBackStack()
+            } catch (exception: NumberFormatException) {
+                Toast.makeText(
+                    requireContext(),
+                    R.string.invalid_number_error,
+                    Toast.LENGTH_SHORT
+                ).show()
+            }
         }
     }
 
-    override fun onCreateDialog(savedInstanceState: Bundle?): Dialog {
 
-        return activity?.let {
-            val builder = AlertDialog.Builder(it)
-            val inflater = requireActivity().layoutInflater;
+    private fun setResult(number: Int) {
+        parentFragmentManager.setFragmentResult(
+            ResultListenerFragment.REQUEST_KEY,
+            bundleOf(ResultListenerFragment.KEY_NUMBER to number)
+        )
+    }
 
-            builder.setView(inflater.inflate(R.layout.dialog_signin, null))
-                // Add action buttons
-                .setPositiveButton(R.string.addExercise,
-                    DialogInterface.OnClickListener { dialog, id ->
-
-                    })
-                .setNegativeButton(R.string.cancel,
-                    DialogInterface.OnClickListener { dialog, id ->
-                        getDialog()?.cancel()
-                    })
-            builder.create()
-        } ?: throw IllegalStateException("Activity cannot be null")
+    private fun setResultWithFMExtension(number: Int) {
+        setFragmentResult(
+            ResultListenerFragment.REQUEST_KEY,
+            bundleOf(ResultListenerFragment.KEY_NUMBER to number)
+        )
     }
 }

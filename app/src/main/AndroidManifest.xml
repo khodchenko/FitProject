@@ -10,7 +10,7 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.FitProject">
         <activity
-            android:name=".AddExerciseActivity"
+            android:name=".NewExerciseFragment"
             android:exported="false" />
         <activity
             android:name=".MainActivity"

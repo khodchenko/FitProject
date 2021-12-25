@@ -101,4 +101,26 @@
     <string name="addExerciseName">enter exercise name</string>
     <string name="addExercise">Add</string>
     <string name="cancel">Cancel</string>
+    <string name="exercise1_name">exercise1</string>
+    <string name="exercise2_name">exercise2</string>
+    <string name="exercise3_name">exercise3</string>
+    <string name="exercise4_name">exercise4</string>
+    <string name="exercise5_name">exercise5</string>
+    <string name="exercise6_name">exercise6</string>
+    <string name="exercise7_name">exercise7</string>
+    <string name="exercise8_name">exercise8</string>
+    <string name="exercise9_name">exercise9</string>
+    <string name="exercise10_name">exercise10</string>
+    <string name="exercise11_name">exercise11</string>
+    <string name="exercise1_description">exercise1_description</string>
+    <string name="exercise2_description">exercise2_description</string>
+    <string name="exercise3_description">exercise3_description</string>
+    <string name="exercise4_description">exercise4_description</string>
+    <string name="exercise5_description">exercise5_description</string>
+    <string name="exercise6_description">exercise6_description</string>
+    <string name="exercise7_description">exercise7_description</string>
+    <string name="exercise8_description">exercise8_description</string>
+    <string name="exercise9_description">exercise9_description</string>
+    <string name="exercise10_description">exercise10_description</string>
+    <string name="exercise11_description">exercise11_description</string>
 </resources>

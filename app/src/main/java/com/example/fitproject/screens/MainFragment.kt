@@ -14,7 +14,7 @@ import androidx.activity.result.contract.ActivityResultContracts
 import androidx.appcompat.widget.AppCompatTextView
 import androidx.fragment.app.Fragment
 import androidx.viewpager2.widget.ViewPager2
-import com.example.fitproject.AddExerciseActivity
+import com.example.fitproject.NewExerciseFragment
 import com.example.fitproject.R
 import com.example.fitproject.adapters.ViewPagerAdapter
 import com.google.android.material.floatingactionbutton.FloatingActionButton
@@ -88,7 +88,7 @@ class MainFragment : Fragment(R.layout.fragment_main) {
         view.findViewById<FloatingActionButton>(R.id.fab_addNewExercise).setOnClickListener {
             //todo change to fragment
             //todo change to navigation
-            startForResult.launch(Intent(activity, AddExerciseActivity::class.java))
+            startForResult.launch(Intent(activity, NewExerciseFragment::class.java))
         }
         view.findViewById<FloatingActionButton>(R.id.fab_second).setOnClickListener {
             Toast.makeText(activity, "SECOND BUTTON CLICKED", Toast.LENGTH_SHORT).show()
