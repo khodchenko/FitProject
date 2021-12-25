@@ -1,7 +1,6 @@
 package com.example.fitproject.screens
 
-import android.app.Activity
-import android.content.Intent
+
 
 import android.os.Bundle
 import android.view.View
@@ -9,23 +8,40 @@ import android.view.animation.Animation
 import android.view.animation.AnimationUtils
 import android.widget.TextView
 import android.widget.Toast
-import androidx.activity.result.ActivityResult
-import androidx.activity.result.contract.ActivityResultContracts
+
 import androidx.appcompat.widget.AppCompatTextView
 import androidx.fragment.app.Fragment
+import androidx.fragment.app.FragmentManager
 import androidx.viewpager2.widget.ViewPager2
 import com.example.fitproject.NewExerciseFragment
 import com.example.fitproject.R
 import com.example.fitproject.adapters.ViewPagerAdapter
+import com.example.fitproject.databinding.FragmentMainBinding
+
 import com.google.android.material.floatingactionbutton.FloatingActionButton
+import com.google.android.material.navigation.NavigationView
+import java.lang.Exception
 
 
 class MainFragment : Fragment(R.layout.fragment_main) {
 
+    private var binding: FragmentMainBinding? = null
+    lateinit var navigationView: NavigationView
     private var datesList = mutableListOf<String>()
 
     companion object {
         const val userNameKey = "USER_NAME"
+
+        @JvmStatic
+        fun newInstance(): MainFragment {
+            val args = Bundle().apply {
+                //putInt (key,value)
+                //putString (key, value)
+            }
+            val fragment = MainFragment()
+            fragment.arguments = args
+            return fragment
+        }
     }
 
 
@@ -60,44 +76,49 @@ class MainFragment : Fragment(R.layout.fragment_main) {
         super.onCreate(savedInstanceState)
 
         postToList()
-
-
     }
 
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        val startForResult = registerForActivityResult(ActivityResultContracts.StartActivityForResult()) { result: ActivityResult ->
-            if (result.resultCode == Activity.RESULT_OK) {
-                val intent = result.data
-                //todo Handle the Intent
-            }
-        }
+        binding = FragmentMainBinding.bind(view)
 
-        view.findViewById<ViewPager2>(R.id.view_pager2).adapter =ViewPagerAdapter(datesList)
-        view.findViewById<ViewPager2>(R.id.view_pager2).orientation = ViewPager2.ORIENTATION_HORIZONTAL
 
-        view.findViewById<AppCompatTextView>(R.id.mainNameTextView).text = arguments?.getString(
+        binding!!.viewPager2.adapter = ViewPagerAdapter(datesList)
+        binding!!.viewPager2.orientation =
+            ViewPager2.ORIENTATION_HORIZONTAL
+
+        binding!!.mainNameTextView.text = arguments?.getString(
             userNameKey
         )
 
-        view.findViewById<FloatingActionButton>(R.id.fab_main).setOnClickListener {
+        binding!!.fabMain.setOnClickListener {
             onFabClicked()
         }
-        view.findViewById<FloatingActionButton>(R.id.fab_addNewExercise).setOnClickListener {
-            //todo change to fragment
+        binding!!.fabAddNewExercise.setOnClickListener {
             //todo change to navigation
-            startForResult.launch(Intent(activity, NewExerciseFragment::class.java))
+            var fragment: Fragment? = null
+            val fragmentManager: FragmentManager = requireActivity().supportFragmentManager
+            val fragmentClass = NewExerciseFragment
+            try {
+                fragment = fragmentClass.newInstance() as Fragment
+            } catch (e: Exception) {
+                e.printStackTrace()
+            }
+            if (fragment != null) {
+            fragmentManager.beginTransaction().replace(R.id.containerView, fragment).commit()
+            }
         }
-        view.findViewById<FloatingActionButton>(R.id.fab_second).setOnClickListener {
+        binding!!.fabSecond.setOnClickListener {
             Toast.makeText(activity, "SECOND BUTTON CLICKED", Toast.LENGTH_SHORT).show()
         }
-        view.findViewById<FloatingActionButton>(R.id.fab_third).setOnClickListener {
+        binding!!.fabThird.setOnClickListener {
             Toast.makeText(activity, "THIRD BUTTON CLICKED", Toast.LENGTH_SHORT).show()
         }
 
     }
+
 
     private fun onFabClicked() {
         setVisibility(fabClicked)
@@ -108,14 +129,16 @@ class MainFragment : Fragment(R.layout.fragment_main) {
     //todo make it shorter
     private fun setVisibility(fabClicked: Boolean) {
         if (!fabClicked) {
-            view?.findViewById<FloatingActionButton>(R.id.fab_addNewExercise)?.visibility = View.VISIBLE
+            view?.findViewById<FloatingActionButton>(R.id.fab_addNewExercise)?.visibility =
+                View.VISIBLE
             view?.findViewById<FloatingActionButton>(R.id.fab_second)?.visibility = View.VISIBLE
             view?.findViewById<FloatingActionButton>(R.id.fab_third)?.visibility = View.VISIBLE
             view?.findViewById<TextView>(R.id.textView)?.visibility = View.VISIBLE
             view?.findViewById<TextView>(R.id.textView2)?.visibility = View.VISIBLE
             view?.findViewById<TextView>(R.id.textView3)?.visibility = View.VISIBLE
-        } else{
-            view?.findViewById<FloatingActionButton>(R.id.fab_addNewExercise)?.visibility = View.INVISIBLE
+        } else {
+            view?.findViewById<FloatingActionButton>(R.id.fab_addNewExercise)?.visibility =
+                View.INVISIBLE
             view?.findViewById<FloatingActionButton>(R.id.fab_second)?.visibility = View.INVISIBLE
             view?.findViewById<FloatingActionButton>(R.id.fab_third)?.visibility = View.INVISIBLE
             view?.findViewById<TextView>(R.id.textView)?.visibility = View.INVISIBLE
@@ -125,16 +148,18 @@ class MainFragment : Fragment(R.layout.fragment_main) {
     }
 
     private fun setAnimation(fabClicked: Boolean) {
-        if(!fabClicked){
-            view?.findViewById<FloatingActionButton>(R.id.fab_addNewExercise)?.startAnimation(fromBottom)
+        if (!fabClicked) {
+            view?.findViewById<FloatingActionButton>(R.id.fab_addNewExercise)
+                ?.startAnimation(fromBottom)
             view?.findViewById<FloatingActionButton>(R.id.fab_second)?.startAnimation(fromBottom)
             view?.findViewById<FloatingActionButton>(R.id.fab_third)?.startAnimation(fromBottom)
             view?.findViewById<TextView>(R.id.textView)?.startAnimation(fromBottom)
             view?.findViewById<TextView>(R.id.textView2)?.startAnimation(fromBottom)
             view?.findViewById<TextView>(R.id.textView3)?.startAnimation(fromBottom)
             view?.findViewById<FloatingActionButton>(R.id.fab_main)?.startAnimation(rotateOpen)
-        }else{
-            view?.findViewById<FloatingActionButton>(R.id.fab_addNewExercise)?.startAnimation(toBottom)
+        } else {
+            view?.findViewById<FloatingActionButton>(R.id.fab_addNewExercise)
+                ?.startAnimation(toBottom)
             view?.findViewById<FloatingActionButton>(R.id.fab_second)?.startAnimation(toBottom)
             view?.findViewById<FloatingActionButton>(R.id.fab_third)?.startAnimation(toBottom)
             view?.findViewById<TextView>(R.id.textView)?.startAnimation(toBottom)
@@ -144,14 +169,19 @@ class MainFragment : Fragment(R.layout.fragment_main) {
         }
     }
 
-    private fun addToList(date:String){
+    private fun addToList(date: String) {
         datesList.add(date)
     }
 
-    private fun postToList(){
-        for (i in 1..5){
+    private fun postToList() {
+        for (i in 1..5) {
             addToList("Tile $i")
         }
+    }
+
+    override fun onDestroyView() {
+        super.onDestroyView()
+        binding = null
     }
 
 

@@ -12,7 +12,6 @@ import androidx.appcompat.app.ActionBarDrawerToggle
 
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentManager
-import com.example.fitproject.screens.ExercisesFragment
 import com.example.fitproject.screens.MainFragment
 import com.example.fitproject.screens.MeasurementsFragment
 import com.example.fitproject.screens.ProgramsFragment
