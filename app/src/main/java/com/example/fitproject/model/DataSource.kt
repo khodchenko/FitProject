@@ -31,6 +31,7 @@ class DataSource(resources: Resources) {
         }
     }
 
+
     /* Returns exercise given an ID. */
     fun getExerciseForId(id: Long): Exercise? {
         exerciseLiveData.value?.let { exercise ->

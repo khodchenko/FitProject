@@ -3,33 +3,43 @@ package com.example.fitproject.adapters
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.ImageView
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
-import com.example.fitproject.model.ExercisesModel
-import com.example.fitproject.NewExerciseFragment
+import com.bumptech.glide.Glide
 import com.example.fitproject.R
+import com.example.fitproject.databinding.AddExersiceItemBinding
+import com.example.fitproject.model.Exercise
 
-class RecyclerViewAdapter(var context: NewExerciseFragment, var exercisesList: ArrayList<ExercisesModel>): RecyclerView.Adapter<RecyclerViewAdapter.ViewHolder>() {
+class RecyclerViewAdapter(private val dataSet: Array<String>) :  RecyclerView.Adapter<RecyclerViewAdapter.ViewHolder>(){
 
+    class ViewHolder(view: View) : RecyclerView.ViewHolder(view) {
+        val textView: TextView
 
-    inner class ViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {}
+        init {
+            // Define click listener for the ViewHolder's View.
+            textView = view.findViewById(R.id.tv_exersiceItem)
+        }
+    }
 
+    // Create new views (invoked by the layout manager)
     override fun onCreateViewHolder(viewGroup: ViewGroup, viewType: Int): ViewHolder {
-
+        // Create a new view, which defines the UI of the list item
         val view = LayoutInflater.from(viewGroup.context)
             .inflate(R.layout.add_exersice_item, viewGroup, false)
+
         return ViewHolder(view)
     }
 
+
+    // Replace the contents of a view (invoked by the layout manager)
     override fun onBindViewHolder(viewHolder: ViewHolder, position: Int) {
-        val item = exercisesList[position]
-        viewHolder.itemView.findViewById<TextView>(R.id.tv_exersiceItem).text = item.exerciseName
-        viewHolder.itemView.findViewById<ImageView>(R.id.iv_exerciseItem).setImageResource(item.exerciseImage)
 
+        // Get element from your dataset at this position and replace the
+        // contents of the view with that element
+        viewHolder.textView.text = dataSet[position]
     }
 
-    override fun getItemCount(): Int {
-        return exercisesList.size
-    }
+    // Return the size of your dataset (invoked by the layout manager)
+    override fun getItemCount() = dataSet.size
+
 }
