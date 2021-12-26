@@ -6,14 +6,11 @@ import android.view.ViewGroup
 import android.widget.ImageView
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
-import com.bumptech.glide.Glide
 import com.example.fitproject.R
-import com.example.fitproject.databinding.AddExersiceItemBinding
 import com.example.fitproject.model.Exercise
-import com.example.fitproject.model.ExercisesModel
 
 class RecyclerViewAdapter() :  RecyclerView.Adapter<RecyclerViewAdapter.ViewHolder>(){
-    private val dataSet: ArrayList<ExercisesModel> = ExercisesModel.createBaseList(20)
+    private val dataSet: ArrayList<Exercise> = Exercise.createBaseList(20)
 
     class ViewHolder(view: View) : RecyclerView.ViewHolder(view) {
         val textView: TextView
@@ -41,8 +38,8 @@ class RecyclerViewAdapter() :  RecyclerView.Adapter<RecyclerViewAdapter.ViewHold
         val currentItem = dataSet[position]
         // Get element from your dataset at this position and replace the
         // contents of the view with that element
-        viewHolder.textView.text = currentItem.exerciseName
-        viewHolder.imageView.setImageResource(currentItem.exerciseImage)  //todo change to specific image
+        viewHolder.textView.text = currentItem.name
+        viewHolder.imageView.setImageResource(currentItem.image)  //todo change to specific image
     }
 
     // Return the size of your dataset (invoked by the layout manager)

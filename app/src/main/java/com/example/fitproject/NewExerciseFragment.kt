@@ -10,12 +10,8 @@ import androidx.recyclerview.widget.LinearLayoutManager
 
 import androidx.recyclerview.widget.RecyclerView
 import com.example.fitproject.adapters.RecyclerViewAdapter
-import com.example.fitproject.databinding.FragmentMainBinding
 import com.example.fitproject.databinding.FragmentNewExerciseBinding
-import com.example.fitproject.model.DataSource
 import com.example.fitproject.model.Exercise
-import com.example.fitproject.model.ExercisesModel
-import com.example.fitproject.screens.MainFragment
 
 
 class NewExerciseFragment : Fragment() {
@@ -55,18 +51,7 @@ class NewExerciseFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
         binding = FragmentNewExerciseBinding.bind(view)
 
-//        exercisesList.add(Exercise(1,"test test", R.drawable.ic_calendar,"test description"))
-//        exercisesList.add(Exercise(2,"test test", R.drawable.ic_calendar,"test description"))
-//        exercisesList.add(Exercise(3,"test test", R.drawable.ic_calendar,"test description"))
-//        exercisesList.add(Exercise(4,"test test", R.drawable.ic_calendar,"test description"))
-//        exercisesList.add(Exercise(5,"test test", R.drawable.ic_calendar,"test description"))
-//        exercisesList.add(Exercise(6,"test test", R.drawable.ic_calendar,"test description"))
-//        exercisesList.add(Exercise(7,"test test", R.drawable.ic_calendar,"test description"))
-//        exercisesList.add(Exercise(8,"test test", R.drawable.ic_calendar,"test description"))
-//        exercisesList.add(Exercise(9,"test test", R.drawable.ic_calendar,"test description"))
-//        exercisesList.add(Exercise(10,"test test", R.drawable.ic_calendar,"test description"))
-//        exercisesList.add(Exercise(11,"test test", R.drawable.ic_calendar,"test description"))
-//
+
 //
 //        //val dataSource = DataSource
 //        //val exerciseList = dataSource.getDataSource(exercisesList)
