@@ -7,10 +7,11 @@ import android.widget.ImageView
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import com.example.fitproject.R
+import com.example.fitproject.model.DataSource
 import com.example.fitproject.model.Exercise
 
-class RecyclerViewAdapter() :  RecyclerView.Adapter<RecyclerViewAdapter.ViewHolder>(){
-    private val dataSet: ArrayList<Exercise> = Exercise.createBaseList(20)
+class RecyclerViewAdapter(val dataSet: ArrayList<Exercise>) :  RecyclerView.Adapter<RecyclerViewAdapter.ViewHolder>(){
+
 
     class ViewHolder(view: View) : RecyclerView.ViewHolder(view) {
         val textView: TextView

@@ -33,12 +33,12 @@ class DataSource(resources: Resources) {
 
 
     /* Returns exercise given an ID. */
-    fun getExerciseForId(id: Long): Exercise? {
-        exerciseLiveData.value?.let { exercise ->
-            return exercise.firstOrNull { it.id == id }
-        }
-        return null
-    }
+//    fun getExerciseForId(id: Long): Exercise? {
+//        exerciseLiveData.value?.let { exercise ->
+//            return exercise.firstOrNull { it.id == id }
+//        }
+//        return null
+//    }
 
     fun getExerciseList(): LiveData<List<Exercise>> {
         return exerciseLiveData

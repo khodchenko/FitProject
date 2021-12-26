@@ -11,6 +11,7 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.fitproject.adapters.RecyclerViewAdapter
 import com.example.fitproject.databinding.FragmentNewExerciseBinding
+import com.example.fitproject.model.DataSource
 import com.example.fitproject.model.Exercise
 
 
@@ -32,7 +33,7 @@ class NewExerciseFragment : Fragment() {
     private lateinit var binding: FragmentNewExerciseBinding
 
     private lateinit var recyclerAdapter: RecyclerViewAdapter
-    lateinit var exercisesList: ArrayList<Exercise>
+    var exercisesList = mutableListOf<Exercise>()
     private lateinit var recyclerview: RecyclerView
     private lateinit var addNewExerciseButton: ImageButton
 
@@ -52,15 +53,15 @@ class NewExerciseFragment : Fragment() {
         binding = FragmentNewExerciseBinding.bind(view)
 
 
-//
-//        //val dataSource = DataSource
-//        //val exerciseList = dataSource.getDataSource(exercisesList)
-//
-        recyclerAdapter = RecyclerViewAdapter()
+
+
+        recyclerAdapter = RecyclerViewAdapter(Exercise.createBaseList(20))
         recyclerview = binding.recyclerView
         recyclerview.layoutManager = LinearLayoutManager(requireContext())
         recyclerview.adapter = recyclerAdapter
         recyclerview.setHasFixedSize(true)
+
+
     }
 }
 
