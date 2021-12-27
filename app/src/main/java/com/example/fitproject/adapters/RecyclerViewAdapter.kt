@@ -1,16 +1,21 @@
 package com.example.fitproject.adapters
 
+import android.annotation.SuppressLint
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.ImageView
 import android.widget.TextView
+import android.widget.Toast
 import androidx.recyclerview.widget.RecyclerView
 import com.example.fitproject.R
-import com.example.fitproject.model.DataSource
 import com.example.fitproject.model.Exercise
+import com.example.fitproject.model.ExerciseService
 
-class RecyclerViewAdapter(val dataSet: ArrayList<Exercise>) :  RecyclerView.Adapter<RecyclerViewAdapter.ViewHolder>(){
+
+class RecyclerViewAdapter(
+    var dataSet: List<Exercise>
+) : RecyclerView.Adapter<RecyclerViewAdapter.ViewHolder>(){
 
 
     class ViewHolder(view: View) : RecyclerView.ViewHolder(view) {
@@ -37,13 +42,16 @@ class RecyclerViewAdapter(val dataSet: ArrayList<Exercise>) :  RecyclerView.Adap
     // Replace the contents of a view (invoked by the layout manager)
     override fun onBindViewHolder(viewHolder: ViewHolder, position: Int) {
         val currentItem = dataSet[position]
-        // Get element from your dataset at this position and replace the
-        // contents of the view with that element
+
+        viewHolder.imageView.tag = dataSet //click
+
         viewHolder.textView.text = currentItem.name
-        viewHolder.imageView.setImageResource(currentItem.image)  //todo change to specific image
+        viewHolder.imageView.setImageResource(currentItem.image)
     }
 
     // Return the size of your dataset (invoked by the layout manager)
     override fun getItemCount() = dataSet.size
+
+
 
 }

@@ -9,7 +9,7 @@ import android.view.animation.AnimationUtils
 import android.widget.TextView
 import android.widget.Toast
 
-import androidx.appcompat.widget.AppCompatTextView
+
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentManager
 import androidx.viewpager2.widget.ViewPager2
