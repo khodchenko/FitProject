@@ -16,9 +16,7 @@ import com.example.fitproject.adapters.RecyclerViewAdapter
 import com.example.fitproject.databinding.FragmentNewExerciseBinding
 import com.example.fitproject.model.Exercise
 import androidx.appcompat.app.AppCompatActivity
-
-
-
+import androidx.navigation.Navigation
 
 
 class NewExerciseFragment : Fragment(R.layout.fragment_new_exercise) {
@@ -49,6 +47,7 @@ class NewExerciseFragment : Fragment(R.layout.fragment_new_exercise) {
 
 
 
+    @SuppressLint("FragmentBackPressedCallback")
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         binding = FragmentNewExerciseBinding.bind(view)
@@ -114,5 +113,7 @@ class NewExerciseFragment : Fragment(R.layout.fragment_new_exercise) {
         super.onStop()
         (activity as AppCompatActivity?)!!.supportActionBar!!.show()
     }
+
+
 }
 

@@ -18,6 +18,7 @@ import com.example.fitproject.R
 import com.example.fitproject.adapters.ViewPagerAdapter
 import com.example.fitproject.databinding.FragmentMainBinding
 
+
 import com.google.android.material.floatingactionbutton.FloatingActionButton
 import com.google.android.material.navigation.NavigationView
 import java.lang.Exception
@@ -129,43 +130,39 @@ class MainFragment : Fragment(R.layout.fragment_main) {
     //todo make it shorter
     private fun setVisibility(fabClicked: Boolean) {
         if (!fabClicked) {
-            view?.findViewById<FloatingActionButton>(R.id.fab_addNewExercise)?.visibility =
-                View.VISIBLE
-            view?.findViewById<FloatingActionButton>(R.id.fab_second)?.visibility = View.VISIBLE
-            view?.findViewById<FloatingActionButton>(R.id.fab_third)?.visibility = View.VISIBLE
-            view?.findViewById<TextView>(R.id.textView)?.visibility = View.VISIBLE
-            view?.findViewById<TextView>(R.id.textView2)?.visibility = View.VISIBLE
-            view?.findViewById<TextView>(R.id.textView3)?.visibility = View.VISIBLE
+            binding!!.fabAddNewExercise.visibility = View.VISIBLE
+            binding!!.fabSecond.visibility = View.VISIBLE
+            binding!!.fabThird.visibility = View.VISIBLE
+            binding!!.textView.visibility = View.VISIBLE
+            binding!!.textView2.visibility = View.VISIBLE
+            binding!!.textView3.visibility = View.VISIBLE
         } else {
-            view?.findViewById<FloatingActionButton>(R.id.fab_addNewExercise)?.visibility =
-                View.INVISIBLE
-            view?.findViewById<FloatingActionButton>(R.id.fab_second)?.visibility = View.INVISIBLE
-            view?.findViewById<FloatingActionButton>(R.id.fab_third)?.visibility = View.INVISIBLE
-            view?.findViewById<TextView>(R.id.textView)?.visibility = View.INVISIBLE
-            view?.findViewById<TextView>(R.id.textView2)?.visibility = View.INVISIBLE
-            view?.findViewById<TextView>(R.id.textView3)?.visibility = View.INVISIBLE
+            binding!!.fabAddNewExercise.visibility = View.INVISIBLE
+            binding!!.fabSecond.visibility = View.INVISIBLE
+            binding!!.fabThird.visibility = View.INVISIBLE
+            binding!!.textView.visibility = View.INVISIBLE
+            binding!!.textView2.visibility = View.INVISIBLE
+            binding!!.textView3.visibility = View.INVISIBLE
         }
     }
 
     private fun setAnimation(fabClicked: Boolean) {
         if (!fabClicked) {
-            view?.findViewById<FloatingActionButton>(R.id.fab_addNewExercise)
-                ?.startAnimation(fromBottom)
-            view?.findViewById<FloatingActionButton>(R.id.fab_second)?.startAnimation(fromBottom)
-            view?.findViewById<FloatingActionButton>(R.id.fab_third)?.startAnimation(fromBottom)
-            view?.findViewById<TextView>(R.id.textView)?.startAnimation(fromBottom)
-            view?.findViewById<TextView>(R.id.textView2)?.startAnimation(fromBottom)
-            view?.findViewById<TextView>(R.id.textView3)?.startAnimation(fromBottom)
-            view?.findViewById<FloatingActionButton>(R.id.fab_main)?.startAnimation(rotateOpen)
+            binding!!.fabAddNewExercise.startAnimation(fromBottom)
+            binding!!.fabSecond.startAnimation(fromBottom)
+            binding!!.fabThird.startAnimation(fromBottom)
+            binding!!.textView.startAnimation(fromBottom)
+            binding!!.textView2.startAnimation(fromBottom)
+            binding!!.textView3.startAnimation(fromBottom)
+            binding!!.fabMain.startAnimation(rotateOpen)
         } else {
-            view?.findViewById<FloatingActionButton>(R.id.fab_addNewExercise)
-                ?.startAnimation(toBottom)
-            view?.findViewById<FloatingActionButton>(R.id.fab_second)?.startAnimation(toBottom)
-            view?.findViewById<FloatingActionButton>(R.id.fab_third)?.startAnimation(toBottom)
-            view?.findViewById<TextView>(R.id.textView)?.startAnimation(toBottom)
-            view?.findViewById<TextView>(R.id.textView2)?.startAnimation(toBottom)
-            view?.findViewById<TextView>(R.id.textView3)?.startAnimation(toBottom)
-            view?.findViewById<FloatingActionButton>(R.id.fab_main)?.startAnimation(rotateClose)
+            binding!!.fabAddNewExercise.startAnimation(toBottom)
+            binding!!.fabSecond.startAnimation(toBottom)
+            binding!!.fabThird.startAnimation(toBottom)
+            binding!!.textView.startAnimation(toBottom)
+            binding!!.textView2.startAnimation(toBottom)
+            binding!!.textView3.startAnimation(toBottom)
+            binding!!.fabMain.startAnimation(rotateClose)
         }
     }
 

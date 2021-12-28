@@ -25,7 +25,10 @@
             app:destination="@id/measurementsFragment" />
         <action
             android:id="@+id/action_mainFragment_to_newExerciseFragment"
-            app:destination="@id/newExerciseFragment" />
+            app:destination="@id/newExerciseFragment"
+            app:launchSingleTop="false"
+            app:popUpTo="@id/mainFragment"
+            app:popUpToInclusive="false" />
     </fragment>
 
     <!--Add popUpTo to deny back button-->
@@ -75,13 +78,5 @@
         android:id="@+id/newExerciseFragment"
         android:name="com.example.fitproject.NewExerciseFragment"
         android:label="fragment_new_exercise"
-        tools:layout="@layout/fragment_new_exercise" >
-        <action
-            android:id="@+id/action_newExerciseFragment_to_noticeDialogFragment"
-            app:destination="@id/noticeDialogFragment" />
-    </fragment>
-    <fragment
-        android:id="@+id/noticeDialogFragment"
-        android:name="com.example.fitproject.NoticeDialogFragment"
-        android:label="NoticeDialogFragment" />
+        tools:layout="@layout/fragment_new_exercise" />
 </navigation>

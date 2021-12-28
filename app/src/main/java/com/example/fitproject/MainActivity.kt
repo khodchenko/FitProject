@@ -9,6 +9,7 @@ import androidx.drawerlayout.widget.DrawerLayout
 import androidx.core.view.GravityCompat
 
 import androidx.appcompat.app.ActionBarDrawerToggle
+import androidx.core.view.isVisible
 
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentManager
@@ -39,7 +40,7 @@ class MainActivity : AppCompatActivity() {
         val drawerToggle = setupDrawerToggle()
 
         setupDrawerContent(navigationViewDrawer)
-
+        navigationViewDrawer.isVisible = false
         // Setup toggle to display hamburger icon with nice animation
         drawerToggle?.isDrawerIndicatorEnabled = true;
         drawerToggle?.syncState()
@@ -47,6 +48,10 @@ class MainActivity : AppCompatActivity() {
 
     }
 
+    override fun onResume() {
+        super.onResume()
+        navigationViewDrawer.isVisible = true
+    }
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
         // The action bar home/up action should open or close the drawer.
         when (item.itemId) {
@@ -65,15 +70,14 @@ class MainActivity : AppCompatActivity() {
         }
     }
 
-    fun selectDrawerItem(menuItem: MenuItem) {
+    private fun selectDrawerItem(menuItem: MenuItem) {
         // Create a new fragment and specify the fragment to show based on nav item clicked
         var fragment: Fragment? = null
-        val fragmentClass: Class<*>
-        fragmentClass = when (menuItem.itemId) {
+        val fragmentClass: Class<*> = when (menuItem.itemId) {
             R.id.nav_first_fragment -> MainFragment::class.java
             R.id.nav_second_fragment -> ProgramsFragment::class.java
-            R.id.nav_third_fragment -> ProgramsFragment::class.java
-            R.id.nav_four_fragment -> MeasurementsFragment::class.java
+            R.id.nav_third_fragment -> MeasurementsFragment::class.java
+            R.id.nav_four_fragment -> ProgramsFragment::class.java
             else -> MainFragment::class.java
         }
         try {
