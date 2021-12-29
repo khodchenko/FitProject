@@ -5,13 +5,14 @@ import android.content.Context
 import android.content.res.TypedArray
 import android.graphics.Color
 import android.graphics.PorterDuff
+import android.os.Build
 import android.util.AttributeSet
 import android.view.LayoutInflater
 import android.view.View
 import android.widget.*
 
 import java.util.*
-import android.os.Build
+
 import com.example.fitproject.R
 import com.example.fitproject.model.Day
 import com.example.fitproject.view.ExpandIconView

@@ -16,7 +16,6 @@ import com.example.fitproject.adapters.RecyclerViewAdapter
 import com.example.fitproject.databinding.FragmentNewExerciseBinding
 import com.example.fitproject.model.Exercise
 import androidx.appcompat.app.AppCompatActivity
-import androidx.navigation.Navigation
 
 
 class NewExerciseFragment : Fragment(R.layout.fragment_new_exercise) {
