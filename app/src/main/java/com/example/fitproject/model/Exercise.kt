@@ -3,6 +3,7 @@ package com.example.fitproject.model
 import android.graphics.drawable.Drawable
 import androidx.annotation.DrawableRes
 import com.example.fitproject.R
+import java.io.Serializable
 
 data class Exercise(
     val id : Long,
@@ -10,4 +11,4 @@ data class Exercise(
     @DrawableRes
     val image: Int,
     val description: String
-)
+) : Serializable

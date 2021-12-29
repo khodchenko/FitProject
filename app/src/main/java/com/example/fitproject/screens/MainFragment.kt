@@ -2,14 +2,12 @@ package com.example.fitproject.screens
 
 
 
+import android.icu.util.Calendar
 import android.os.Bundle
 import android.view.View
 import android.view.animation.Animation
 import android.view.animation.AnimationUtils
-import android.widget.TextView
 import android.widget.Toast
-
-
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentManager
 import androidx.viewpager2.widget.ViewPager2
@@ -18,20 +16,23 @@ import com.example.fitproject.R
 import com.example.fitproject.adapters.ViewPagerAdapter
 import com.example.fitproject.databinding.FragmentMainBinding
 
-
-import com.google.android.material.floatingactionbutton.FloatingActionButton
+import com.example.fitproject.widget.CollapsibleCalendar
 import com.google.android.material.navigation.NavigationView
 import java.lang.Exception
 
 
 class MainFragment : Fragment(R.layout.fragment_main) {
 
+    private val NUM_AWESOME_VIEWS = 3
     private var binding: FragmentMainBinding? = null
     lateinit var navigationView: NavigationView
     private var datesList = mutableListOf<String>()
+    private var fabClicked = false
+    lateinit var collapsibleCalendar: CollapsibleCalendar
 
     companion object {
         const val userNameKey = "USER_NAME"
+        var TAG = "MainActivity"
 
         @JvmStatic
         fun newInstance(): MainFragment {
@@ -71,7 +72,9 @@ class MainFragment : Fragment(R.layout.fragment_main) {
         )
     }
 
-    private var fabClicked = false
+
+
+
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -83,12 +86,16 @@ class MainFragment : Fragment(R.layout.fragment_main) {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
+        val c = Calendar.getInstance()
+        var day = c.get(Calendar.DAY_OF_MONTH)
+
         binding = FragmentMainBinding.bind(view)
 
 
         binding!!.viewPager2.adapter = ViewPagerAdapter(datesList)
         binding!!.viewPager2.orientation =
             ViewPager2.ORIENTATION_HORIZONTAL
+        binding!!.viewPager2.offscreenPageLimit = 3
 
         binding!!.mainNameTextView.text = arguments?.getString(
             userNameKey

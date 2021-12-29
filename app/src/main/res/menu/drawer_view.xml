@@ -5,19 +5,19 @@
         <item
             android:id="@+id/nav_first_fragment"
             android:icon="@drawable/ic_home"
-            android:title="HOME" />
+            android:title="@string/home" />
         <item
             android:id="@+id/nav_second_fragment"
             android:icon="@drawable/ic_one"
-            android:title="PROGRAMS" />
+            android:title="@string/programs" />
         <item
             android:id="@+id/nav_third_fragment"
             android:icon="@drawable/ic_two"
-            android:title="MEASUREMENTS" />
+            android:title="@string/measurements" />
         <item
             android:id="@+id/nav_four_fragment"
             android:icon="@drawable/ic_note"
-            android:title="NOTEBOOK" />
+            android:title="@string/notebook" />
     </group>
 
     <item android:title="Sub items">
