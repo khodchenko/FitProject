@@ -8,12 +8,12 @@ import android.view.MotionEvent
 import android.view.View
 import android.view.View.OnTouchListener
 
-abstract class OnSwipeTouchListener(ctx: Context) : OnTouchListener {
+abstract class OnSwipeTouchListener(context: Context) : OnTouchListener {
 
     private val gestureDetector: GestureDetector
 
     init {
-        gestureDetector = GestureDetector(ctx, GestureListener())
+        gestureDetector = GestureDetector(context, GestureListener())
     }
 
     @SuppressLint("ClickableViewAccessibility")

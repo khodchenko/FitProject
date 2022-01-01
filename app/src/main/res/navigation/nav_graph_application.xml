@@ -76,7 +76,7 @@
         tools:layout="@layout/fragment_measurements" />
     <fragment
         android:id="@+id/newExerciseFragment"
-        android:name="com.example.fitproject.NewExerciseFragment"
+        android:name="com.example.fitproject.screens.NewExerciseFragment"
         android:label="fragment_new_exercise"
         tools:layout="@layout/fragment_new_exercise" />
 </navigation>

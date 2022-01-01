@@ -1,4 +1,4 @@
-package com.example.fitproject
+package com.example.fitproject.screens
 
 
 import android.annotation.SuppressLint
@@ -16,6 +16,7 @@ import com.example.fitproject.adapters.RecyclerViewAdapter
 import com.example.fitproject.databinding.FragmentNewExerciseBinding
 import com.example.fitproject.model.Exercise
 import androidx.appcompat.app.AppCompatActivity
+import com.example.fitproject.R
 
 
 class NewExerciseFragment : Fragment(R.layout.fragment_new_exercise) {
@@ -51,14 +52,9 @@ class NewExerciseFragment : Fragment(R.layout.fragment_new_exercise) {
         super.onViewCreated(view, savedInstanceState)
         binding = FragmentNewExerciseBinding.bind(view)
 
-
         createBaseList()
 
-
-
         recyclerAdapter = RecyclerViewAdapter(listOfItems)
-
-
         recyclerview = binding.recyclerView
         recyclerview.layoutManager = LinearLayoutManager(requireContext())
         recyclerview.adapter = recyclerAdapter
@@ -77,7 +73,7 @@ class NewExerciseFragment : Fragment(R.layout.fragment_new_exercise) {
     private fun createBaseList() {
         var index = 0
         while (index < 100){
-            listOfItems.add(Exercise(index.toLong(),"TEST $index",R.drawable.base_exercise,"test"))
+            listOfItems.add(Exercise(index.toLong(),"TEST $index", R.drawable.base_exercise,"test"))
             index++
         }
     }
@@ -95,7 +91,8 @@ class NewExerciseFragment : Fragment(R.layout.fragment_new_exercise) {
                 addDialog,_ ->
                // val image =
                 val name = editText.text.toString()
-                listOfItems.add(Exercise((listOfItems.lastIndex)+1.toLong(),name,R.drawable.base_exercise,"test"))
+                listOfItems.add(Exercise((listOfItems.lastIndex)+1.toLong(),name,
+                    R.drawable.base_exercise,"test"))
                 recyclerAdapter.notifyDataSetChanged()
                 addDialog.dismiss()
             }
