@@ -2,7 +2,10 @@ package com.example.fitproject.screens
 
 
 import android.annotation.SuppressLint
+import android.app.ActionBar
 import android.app.AlertDialog
+import android.content.Context
+import android.content.SharedPreferences
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -16,8 +19,11 @@ import com.example.fitproject.adapters.RecyclerViewAdapter
 import com.example.fitproject.databinding.FragmentNewExerciseBinding
 import com.example.fitproject.model.Exercise
 import androidx.appcompat.app.AppCompatActivity
+import com.example.fitproject.MainActivity
 import com.example.fitproject.R
 
+const val APP_PREFERENCES = "APP_PREFERENCES"
+const val PREF_EXERCISE_VALUE = "PREF_EXERCISE_VALUE"
 
 class NewExerciseFragment : Fragment(R.layout.fragment_new_exercise) {
 
@@ -39,10 +45,10 @@ class NewExerciseFragment : Fragment(R.layout.fragment_new_exercise) {
     private lateinit var binding: FragmentNewExerciseBinding
 
     private lateinit var recyclerAdapter: RecyclerViewAdapter
-    var exercisesList = mutableListOf<Exercise>()
     private lateinit var recyclerview: RecyclerView
-    private lateinit var addNewExerciseButton: ImageButton
-    val listOfItems = mutableListOf<Exercise>()
+    //private lateinit var addNewExerciseButton: ImageButton
+    private val listOfItems = mutableListOf<Exercise>()
+    private lateinit var preferences: SharedPreferences
 
 
 
@@ -52,8 +58,15 @@ class NewExerciseFragment : Fragment(R.layout.fragment_new_exercise) {
         super.onViewCreated(view, savedInstanceState)
         binding = FragmentNewExerciseBinding.bind(view)
 
+        (activity as AppCompatActivity?)!!.supportActionBar?.title = "Add New Exercise"
+        (activity as AppCompatActivity?)!!.supportActionBar?.customView = binding.toolbar2
+
+
+        preferences = requireActivity().getSharedPreferences(APP_PREFERENCES, Context.MODE_PRIVATE)
         createBaseList()
 
+
+        //recycler view
         recyclerAdapter = RecyclerViewAdapter(listOfItems)
         recyclerview = binding.recyclerView
         recyclerview.layoutManager = LinearLayoutManager(requireContext())
@@ -67,15 +80,15 @@ class NewExerciseFragment : Fragment(R.layout.fragment_new_exercise) {
 
     override fun onResume() {
         super.onResume()
-        (activity as AppCompatActivity?)!!.supportActionBar!!.hide()
+
     }
 
     private fun createBaseList() {
         var index = 0
-        while (index < 100){
-            listOfItems.add(Exercise(index.toLong(),"TEST $index", R.drawable.base_exercise,"test"))
-            index++
-        }
+
+        listOfItems.add(Exercise(index.toLong(),
+            preferences.getString(PREF_EXERCISE_VALUE, "").toString(), R.drawable.base_exercise,"test"))
+
     }
 
     @SuppressLint("InflateParams", "NotifyDataSetChanged")
@@ -85,6 +98,7 @@ class NewExerciseFragment : Fragment(R.layout.fragment_new_exercise) {
         val imageChooseButton = inflated.findViewById<Button>(R.id.button_addImage)
         val editText = inflated.findViewById<EditText>(R.id.editText_addExerciseName)
 
+
         val addDialog = AlertDialog.Builder(activity)
         addDialog.setView(inflated)
             .setPositiveButton("Confirm"){
@@ -93,6 +107,9 @@ class NewExerciseFragment : Fragment(R.layout.fragment_new_exercise) {
                 val name = editText.text.toString()
                 listOfItems.add(Exercise((listOfItems.lastIndex)+1.toLong(),name,
                     R.drawable.base_exercise,"test"))
+                preferences.edit()
+                    .putString(PREF_EXERCISE_VALUE, name)
+                    .apply()
                 recyclerAdapter.notifyDataSetChanged()
                 addDialog.dismiss()
             }

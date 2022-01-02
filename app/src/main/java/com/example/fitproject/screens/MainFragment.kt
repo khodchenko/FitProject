@@ -8,7 +8,6 @@ import android.view.View
 import android.view.animation.Animation
 import android.view.animation.AnimationUtils
 import android.widget.Toast
-import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentManager
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -18,8 +17,8 @@ import com.example.fitproject.adapters.DateRecyclerAdapter
 import com.example.fitproject.adapters.ViewPagerAdapter
 import com.example.fitproject.databinding.FragmentMainBinding
 import com.example.fitproject.model.Day
-import com.example.fitproject.model.Exercise
 import java.lang.Exception
+import java.util.*
 
 class MainFragment : Fragment(R.layout.fragment_main) {
 
@@ -72,14 +71,14 @@ class MainFragment : Fragment(R.layout.fragment_main) {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
-        postToList()
+        addToList()
     }
 
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         binding = FragmentMainBinding.bind(view)
-        (activity as AppCompatActivity?)!!.supportActionBar!!.hide()
+
         //date recycler view
         createBaseList()
         val adapter =  DateRecyclerAdapter(days)
@@ -169,14 +168,25 @@ class MainFragment : Fragment(R.layout.fragment_main) {
         }
     }
 
-    private fun addToList(date: String) {
-        datesList.add(date)
-    }
 
-    private fun postToList() {
-        for (i in 1..5) {
-            addToList("Tile $i")
-        }
+    private fun addToList() {
+        val c = Calendar.getInstance()
+        val currentDay = c.get(Calendar.DAY_OF_MONTH)
+        val currentYear = c.get(Calendar.YEAR)
+        val currentMonth = c.get(Calendar.MONTH)
+
+
+        datesList.add("$currentDay $currentMonth $currentYear")
+        datesList.add("$currentDay $currentMonth $currentYear")
+        datesList.add("$currentDay $currentMonth $currentYear")
+        datesList.add("$currentDay $currentMonth $currentYear")
+        datesList.add("$currentDay $currentMonth $currentYear")
+        datesList.add("$currentDay $currentMonth $currentYear")
+        datesList.add("$currentDay $currentMonth $currentYear")
+        datesList.add("$currentDay $currentMonth $currentYear")
+
+
+
     }
 
     private fun createBaseList() {
@@ -186,6 +196,7 @@ class MainFragment : Fragment(R.layout.fragment_main) {
             index++
         }
     }
+
 
     override fun onDestroyView() {
         super.onDestroyView()

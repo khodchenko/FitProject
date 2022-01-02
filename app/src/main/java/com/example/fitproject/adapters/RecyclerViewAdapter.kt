@@ -1,16 +1,13 @@
 package com.example.fitproject.adapters
 
-import android.annotation.SuppressLint
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.ImageView
 import android.widget.TextView
-import android.widget.Toast
 import androidx.recyclerview.widget.RecyclerView
 import com.example.fitproject.R
 import com.example.fitproject.model.Exercise
-import com.example.fitproject.model.ExerciseService
 
 
 class RecyclerViewAdapter(
@@ -33,7 +30,7 @@ class RecyclerViewAdapter(
     override fun onCreateViewHolder(viewGroup: ViewGroup, viewType: Int): ViewHolder {
         // Create a new view, which defines the UI of the list item
         val view = LayoutInflater.from(viewGroup.context)
-            .inflate(R.layout.add_exersice_item, viewGroup, false)
+            .inflate(R.layout.item_add_exersice, viewGroup, false)
 
         return ViewHolder(view)
     }
