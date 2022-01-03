@@ -68,17 +68,11 @@ class MainFragment : Fragment(R.layout.fragment_main) {
         )
     }
 
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-
-        addToList()
-    }
-
-
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         binding = FragmentMainBinding.bind(view)
-
+        //crate dates list of viewpager
+        addToList()
         //date recycler view
         createBaseList()
         val adapter =  DateRecyclerAdapter(days)
@@ -178,12 +172,11 @@ class MainFragment : Fragment(R.layout.fragment_main) {
         val currentMonth = c.get(Calendar.MONTH)
 
         val list: MutableList<Date> = ArrayList()
-
-
-
         // Today
         val cal: Calendar = Calendar.getInstance()
         var date:Date = cal.time
+       // var date = Date(2001,11,22) //todo depracated
+        cal.set(2021,11,12)
         for (i in 1..500) {
             list.add(date)
             cal.add(Calendar.DATE, +1)
