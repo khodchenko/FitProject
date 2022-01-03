@@ -90,6 +90,8 @@ class MainFragment : Fragment(R.layout.fragment_main) {
         binding!!.viewPager2.orientation =
             ViewPager2.ORIENTATION_HORIZONTAL
         binding!!.viewPager2.offscreenPageLimit = 3
+        binding!!.viewPager2.currentItem = 1 //todo
+
         //main tv
         binding!!.mainNameTextView.text = arguments?.getString(
             userNameKey
@@ -175,15 +177,26 @@ class MainFragment : Fragment(R.layout.fragment_main) {
         val currentYear = c.get(Calendar.YEAR)
         val currentMonth = c.get(Calendar.MONTH)
 
+        val list: MutableList<Date> = ArrayList()
 
-        datesList.add("$currentDay $currentMonth $currentYear")
-        datesList.add("$currentDay $currentMonth $currentYear")
-        datesList.add("$currentDay $currentMonth $currentYear")
-        datesList.add("$currentDay $currentMonth $currentYear")
-        datesList.add("$currentDay $currentMonth $currentYear")
-        datesList.add("$currentDay $currentMonth $currentYear")
-        datesList.add("$currentDay $currentMonth $currentYear")
-        datesList.add("$currentDay $currentMonth $currentYear")
+
+
+        // Today
+        val cal: Calendar = Calendar.getInstance()
+        var date:Date = cal.time
+        for (i in 1..500) {
+            list.add(date)
+            cal.add(Calendar.DATE, +1)
+            date = cal.time
+            datesList.add("$date")
+        }
+
+
+
+//        for (i in 1..500){
+//            datesList.add("$i")
+//        }
+
 
 
 

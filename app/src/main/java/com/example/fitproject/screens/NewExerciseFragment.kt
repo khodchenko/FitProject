@@ -7,11 +7,10 @@ import android.app.AlertDialog
 import android.content.Context
 import android.content.SharedPreferences
 import android.os.Bundle
-import android.view.LayoutInflater
-import android.view.View
 import android.widget.Button
 import android.widget.EditText
-import android.widget.ImageButton
+
+import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
@@ -19,11 +18,20 @@ import com.example.fitproject.adapters.RecyclerViewAdapter
 import com.example.fitproject.databinding.FragmentNewExerciseBinding
 import com.example.fitproject.model.Exercise
 import androidx.appcompat.app.AppCompatActivity
-import com.example.fitproject.MainActivity
+
+import android.view.*
 import com.example.fitproject.R
+import android.R.menu
+
+import android.view.MenuInflater
+
+
+
+
 
 const val APP_PREFERENCES = "APP_PREFERENCES"
 const val PREF_EXERCISE_VALUE = "PREF_EXERCISE_VALUE"
+
 
 class NewExerciseFragment : Fragment(R.layout.fragment_new_exercise) {
 
@@ -46,11 +54,10 @@ class NewExerciseFragment : Fragment(R.layout.fragment_new_exercise) {
 
     private lateinit var recyclerAdapter: RecyclerViewAdapter
     private lateinit var recyclerview: RecyclerView
+    private var keyMap = mutableMapOf<String,Exercise>()
     //private lateinit var addNewExerciseButton: ImageButton
     private val listOfItems = mutableListOf<Exercise>()
     private lateinit var preferences: SharedPreferences
-
-
 
 
     @SuppressLint("FragmentBackPressedCallback")
@@ -63,6 +70,7 @@ class NewExerciseFragment : Fragment(R.layout.fragment_new_exercise) {
 
 
         preferences = requireActivity().getSharedPreferences(APP_PREFERENCES, Context.MODE_PRIVATE)
+
         createBaseList()
 
 
@@ -71,7 +79,7 @@ class NewExerciseFragment : Fragment(R.layout.fragment_new_exercise) {
         recyclerview = binding.recyclerView
         recyclerview.layoutManager = LinearLayoutManager(requireContext())
         recyclerview.adapter = recyclerAdapter
-       // recyclerview.setHasFixedSize(true)
+        // recyclerview.setHasFixedSize(true)
 
         binding.ibAddNewExercise.setOnClickListener {
             addNewExercise()
@@ -86,13 +94,12 @@ class NewExerciseFragment : Fragment(R.layout.fragment_new_exercise) {
     private fun createBaseList() {
         var index = 0
 
-        listOfItems.add(Exercise(index.toLong(),
-            preferences.getString(PREF_EXERCISE_VALUE, "").toString(), R.drawable.base_exercise,"test"))
+        }
 
-    }
+
 
     @SuppressLint("InflateParams", "NotifyDataSetChanged")
-    private fun addNewExercise(){
+    private fun addNewExercise() {
         val inflater = LayoutInflater.from(activity)
         val inflated = inflater.inflate(R.layout.dialog_add_exercise, null)
         val imageChooseButton = inflated.findViewById<Button>(R.id.button_addImage)
@@ -101,26 +108,29 @@ class NewExerciseFragment : Fragment(R.layout.fragment_new_exercise) {
 
         val addDialog = AlertDialog.Builder(activity)
         addDialog.setView(inflated)
-            .setPositiveButton("Confirm"){
-                addDialog,_ ->
-               // val image =
+            .setPositiveButton("Confirm") { addDialog, _ ->
+                // val image =
                 val name = editText.text.toString()
-                listOfItems.add(Exercise((listOfItems.lastIndex)+1.toLong(),name,
-                    R.drawable.base_exercise,"test"))
+                listOfItems.add(
+                    Exercise((listOfItems.lastIndex) + 1.toLong(), name, R.drawable.base_exercise, "test")
+                )
                 preferences.edit()
-                    .putString(PREF_EXERCISE_VALUE, name)
+                    .putString((listOfItems.lastIndex+1).toString(), name)
                     .apply()
                 recyclerAdapter.notifyDataSetChanged()
+
+                Toast.makeText(requireActivity(), "${listOfItems.size + 1}", Toast.LENGTH_SHORT).show()
                 addDialog.dismiss()
             }
-            .setNegativeButton("Cancel"){
-                addDialog,_->
+            .setNegativeButton("Cancel") { addDialog, _ ->
                 addDialog.dismiss()
             }
             .create()
             .show()
 
     }
+
+
 
     override fun onStop() {
         super.onStop()
