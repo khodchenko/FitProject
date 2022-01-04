@@ -3,11 +3,14 @@ package com.example.fitproject.screens
 
 
 
+import android.annotation.SuppressLint
+import android.os.Build
 import android.os.Bundle
 import android.view.View
 import android.view.animation.Animation
 import android.view.animation.AnimationUtils
 import android.widget.Toast
+import androidx.annotation.RequiresApi
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentManager
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -18,15 +21,22 @@ import com.example.fitproject.adapters.ViewPagerAdapter
 import com.example.fitproject.databinding.FragmentMainBinding
 import com.example.fitproject.model.Day
 import java.lang.Exception
+import java.text.SimpleDateFormat
+import java.time.format.DateTimeFormatter
 import java.util.*
 
+@SuppressLint("SimpleDateFormat")
 class MainFragment : Fragment(R.layout.fragment_main) {
 
     private var binding: FragmentMainBinding? = null
     private var datesList = mutableListOf<String>()
     private var fabClicked = false
     private var days = mutableListOf<Day>()
-
+    val list: MutableList<Date> = ArrayList()
+    val format = SimpleDateFormat("dd/MM/yyyy")
+    private var cal: Calendar = Calendar.getInstance()
+    private val c  = Calendar.getInstance()
+    val currentDay:Date = c.time
     companion object {
         const val userNameKey = "USER_NAME"
         var TAG = "MainActivity"
@@ -68,11 +78,17 @@ class MainFragment : Fragment(R.layout.fragment_main) {
         )
     }
 
+    @RequiresApi(Build.VERSION_CODES.O)
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         binding = FragmentMainBinding.bind(view)
         //crate dates list of viewpager
-        addToList()
+
+        // Today
+        cal = Calendar.Builder().setDate(2021, 11, 29).build()
+
+        //cal.set(2021,11,12)
+
         //date recycler view
         createBaseList()
         val adapter =  DateRecyclerAdapter(days)
@@ -84,7 +100,8 @@ class MainFragment : Fragment(R.layout.fragment_main) {
         binding!!.viewPager2.orientation =
             ViewPager2.ORIENTATION_HORIZONTAL
         binding!!.viewPager2.offscreenPageLimit = 3
-        binding!!.viewPager2.currentItem = 1 //todo
+        addToList()
+   //    binding!!.viewPager2.currentItem = date.indexOf(currentDay)//todo
 
         //main tv
         binding!!.mainNameTextView.text = arguments?.getString(
@@ -117,7 +134,23 @@ class MainFragment : Fragment(R.layout.fragment_main) {
 
 
     }
+    private fun addToList() {
+        for (i in 1..500) {
+            var date:Date = cal.time
+            list.add(date)
+            cal.add(Calendar.DATE, +1)
+            date = cal.time
+            datesList.add("$date")
+            if (date.toSimpleString() == currentDay.toSimpleString()){
+                binding!!.viewPager2.currentItem = datesList.size
+            }
+        }
+    }
 
+    fun Date.toSimpleString() : String {
+        val format = SimpleDateFormat("dd/MM/yyy")
+        return format.format(this)
+    }
 
     private fun onFabClicked() {
         setVisibility(fabClicked)
@@ -165,35 +198,7 @@ class MainFragment : Fragment(R.layout.fragment_main) {
     }
 
 
-    private fun addToList() {
-        val c = Calendar.getInstance()
-        val currentDay = c.get(Calendar.DAY_OF_MONTH)
-        val currentYear = c.get(Calendar.YEAR)
-        val currentMonth = c.get(Calendar.MONTH)
 
-        val list: MutableList<Date> = ArrayList()
-        // Today
-        val cal: Calendar = Calendar.getInstance()
-        var date:Date = cal.time
-       // var date = Date(2001,11,22) //todo depracated
-        cal.set(2021,11,12)
-        for (i in 1..500) {
-            list.add(date)
-            cal.add(Calendar.DATE, +1)
-            date = cal.time
-            datesList.add("$date")
-        }
-
-
-
-//        for (i in 1..500){
-//            datesList.add("$i")
-//        }
-
-
-
-
-    }
 
     private fun createBaseList() {
         var index = 0
