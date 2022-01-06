@@ -15,6 +15,7 @@ import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentManager
 import com.example.fitproject.screens.MainFragment
 import com.example.fitproject.screens.MeasurementsFragment
+import com.example.fitproject.screens.NoteFragment
 import com.example.fitproject.screens.ProgramsFragment
 import java.lang.Exception
 import com.google.android.material.navigation.NavigationView
@@ -77,7 +78,7 @@ class MainActivity : AppCompatActivity() {
             R.id.nav_first_fragment -> MainFragment::class.java
             R.id.nav_second_fragment -> ProgramsFragment::class.java
             R.id.nav_third_fragment -> MeasurementsFragment::class.java
-            R.id.nav_four_fragment -> ProgramsFragment::class.java
+            R.id.nav_four_fragment -> NoteFragment::class.java
             else -> MainFragment::class.java
         }
         try {
